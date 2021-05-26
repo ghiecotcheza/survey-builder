@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\SurveyController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,4 +25,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/survey/create', [SurveyController::class, 'create']);
+Route::post('/survey/create', [SurveyController::class, 'store']);
+Route::get('/survey/show/{survey}', [SurveyController::class, 'show'])->name('survey.show');
+
+Route::get('/survey/{id}/question/create', [QuestionController::class, 'create'] );
+Route::post('/survey/{id}/question', [QuestionController::class, 'store'] );
+
+
+
+

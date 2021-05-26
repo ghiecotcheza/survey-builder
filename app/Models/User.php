@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -43,10 +44,10 @@ class User extends Authenticatable
         /**
      * Returns surveys that are associated with this user
      * 
-     * @Return hasMany
+     * @Return HasMany
      * 
      */
-    public function surveys()
+    public function surveys(): HasMany
     {
         return $this->hasMany(Survey::class);
     }
@@ -54,10 +55,10 @@ class User extends Authenticatable
      /**
      * Returns responses made by the user
      * 
-     * @Return hasMany
+     * @Return HasMany
      * 
      */
-    public function responses()
+    public function responses(): HasMany
     {
         return $this->hasMany(Response::class);
     }

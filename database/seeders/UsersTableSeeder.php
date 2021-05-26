@@ -30,7 +30,6 @@ class UsersTableSeeder extends Seeder
 
         foreach ($this->users as $user) {
             User::firstOrCreate([
-
                 'email'     => $user['email'],
             ], [
 

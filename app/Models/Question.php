@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Question extends Model
 {
     use HasFactory;
     
-    protected $fillable = [
-       
+    protected $fillable = [   
         'survey_id',
         'question',
         'description',
@@ -20,10 +21,10 @@ class Question extends Model
     /**
      * Returns the survey which this question belongs to
      * 
-     * @Return belongsTo
+     * @Return BelongsTo
      * 
      */
-    public function survey()
+    public function survey(): BelongsTo
     {
         return $this->belongsTo(Survey::class);
     }
@@ -31,32 +32,21 @@ class Question extends Model
     /**
      * Returns the options associated with this question
      * 
-     * @Return hasMany
+     * @Return HasMany
      * 
      */
-    public function questionOptions()
+    public function options(): HasMany
     {
         return $this->hasMany(QuestionOption::class);
-    }
-
-    /**
-     * Returns the responses made by the user for this question
-     * 
-     * @Return hasMany
-     * 
-     */
-    public function responseAnswers()
-    {
-        return $this->hasMany(ResponseAnswer::class);
     }
  
     /**
      * Returns the questionType of this question
      * 
-     * @Return belongsTo
+     * @Return BelongsTo
      * 
      */
-    public function questionType()
+    public function type(): BelongsTo
     {
         return $this->belongsTo(QuestionType::class);
     }

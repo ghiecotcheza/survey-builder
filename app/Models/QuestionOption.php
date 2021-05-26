@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class QuestionOption extends Model
 {
     use HasFactory;
     
-    protected $fillable = [
-       
+    protected $fillable = [       
         'question_id',
         'option',
     ];
@@ -18,10 +18,10 @@ class QuestionOption extends Model
     /**
      * Returns the question which this questionOptions belongs to
      * 
-     * @Return belongsTo
+     * @Return BelongsTo
      * 
      */
-    public function question()
+    public function question(): BelongsTo
     {
         return $this->belongsTo(Question::class);
     }
