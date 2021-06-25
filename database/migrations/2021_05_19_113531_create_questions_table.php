@@ -18,7 +18,7 @@ class CreateQuestionsTable extends Migration
             $table->foreignId('question_type_id')->constrained('question_types');
             $table->foreignId('survey_id')->constrained('surveys');
             $table->string('question');
-            $table->string('description');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

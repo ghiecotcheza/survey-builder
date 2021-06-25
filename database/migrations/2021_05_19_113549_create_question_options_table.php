@@ -17,6 +17,7 @@ class CreateQuestionOptionsTable extends Migration
             $table->id();
             $table->foreignId('question_id')->constrained('questions');
             $table->text('option');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

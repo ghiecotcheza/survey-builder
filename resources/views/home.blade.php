@@ -13,7 +13,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <a href="/survey/create" class="btn btn-primary">Create a new Survey</a>
+                    
+                    <a href="{{ route('survey.index') }}" class="btn btn-primary mr-4">Show all my Survey</a>
+                    <a  href="{{ route('survey.new') }}" class="btn btn-primary">Create a new Survey</a>
+
                 </div>
             </div>
         </div>

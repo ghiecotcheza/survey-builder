@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Response extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     
     protected $fillable = [        
         'survey_id',
@@ -22,7 +25,7 @@ class Response extends Model
      * @Return HasMany
      * 
      */
-    public function responseAnswers(): HasMany
+    public function answers(): HasMany
     {
         return $this->hasMany(ResponseAnswer::class);
     }
@@ -48,4 +51,16 @@ class Response extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Returns the question where this response belongs to
+     *
+     * @Return BelongsTo
+     *
+     */
+    public function question(): BelongsTo
+    {
+        return $this->belongsTo(Question::class);
+    }
+
 }

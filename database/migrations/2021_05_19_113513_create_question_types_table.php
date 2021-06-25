@@ -17,6 +17,7 @@ class CreateQuestionTypesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('keyname');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
