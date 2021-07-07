@@ -28,7 +28,9 @@ class SurveyController extends Controller
      * @return  View
      */
     public function index(Survey $survey): View
-    { 
+    {   
+        // $user = auth()->user()->generateToken();
+        // dd(response()->json(['data' => $user->toArray()], 201));
         $survey = auth()->user()->surveys()->orderBy('updated_at', 'desc')->get();
         
         return view('survey.show', compact('survey'));

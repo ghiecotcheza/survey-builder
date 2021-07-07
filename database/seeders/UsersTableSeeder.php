@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
 {
@@ -35,6 +36,7 @@ class UsersTableSeeder extends Seeder
 
                 'name'      => $user['name'],
                 'password'  => '',
+                
 
             ]);
         }

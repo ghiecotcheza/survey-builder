@@ -8,6 +8,8 @@ use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\QuestionOptionController;
 use App\Http\Controllers\ResponseAnswerController;
+use App\Models\Permission;
+use App\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,7 +43,7 @@ Route::get('/survey/{survey}/question/{question}/edit', [QuestionController::cla
 Route::post('/survey/{survey}/question/{question}/update', [QuestionController::class, 'update'])->name('question.update');
 
 Route::get('/survey/{survey}/question/{question}/options', [QuestionOptionController::class, 'options'])->name('options');
-Route::post('/survey/{survey}/question/{question}',[QuestionOptionController::class, 'store'])->name('option.store');
+Route::post('/survey/{survey}/question/{question}', [QuestionOptionController::class, 'store'])->name('option.store');
 Route::get('/survey/{survey}/question/{question}/options/edit', [QuestionOptionController::class, 'edit'])->name('option.edit');
 Route::get('survey/{survey}/question/{question}/options/update', [QuestionOptionController::class, 'update'])->name('option.update');
 Route::delete('/survey/{survey}/question/{question}/delete', [QuestionController::class, 'destroy'])->name('question.delete');
@@ -50,4 +52,61 @@ Route::get('/survey/{survey}/{surveyTitle}', [ResponseAnswerController::class, '
 Route::post('/survey/{survey}/response/{surveyTitle}', [ResponseAnswerController::class, 'store'])->name('response.store');
 
 
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
+});
 
+
+Route::get('/test', function () {
+    print('here');
+
+    //   $permissionsByRole = [
+    //     'user'  => [
+    //         'make survey',
+    //         'edit survey',
+    //         'view survey',
+    //         'answer survey'
+    //     ],
+    //     'guest' => [
+    //         'view survey',
+    //         'answer survey'
+    //     ]
+    // ];
+
+
+    $permissionsByRole = [
+        'user' => [
+            'create survey',
+            'edit survey',
+            'delete survey'
+        ],
+
+        'guest' => [
+            'view survey',
+            'answer survey'
+        ],
+
+    ];
+
+    $insertPermissions = fn ($role) => collect($permissionsByRole[$role])
+        ->map(fn ($name) => Permission::insertGetId(['name' => $name, 'guard_name' => 'web']))
+        ->toArray();
+
+    $permissionIdsByRole = [
+        'user' => $insertPermissions('user'),
+        'guest' => $insertPermissions('guest')
+  
+    ];
+
+    foreach ($permissionIdsByRole as $role => $pemissionsIds) {
+        $role = Role::whereName($role)->first();
+    }
+
+    //  $permissions = collect($permissionsByRole)->values()->collapse()->unique()
+    //   ->map(fn ($name) => );
+    //  ->map(function($name) => return "bla". $name);
+    //  ->toArray();
+    //  insert to permission table the permissions
+    dd($permissionIdsByRole);
+});
