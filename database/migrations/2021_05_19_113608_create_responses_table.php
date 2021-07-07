@@ -17,6 +17,7 @@ class CreateResponsesTable extends Migration
             $table->id();
             $table->foreignId('survey_id')->constrained('surveys');
             $table->foreignId('user_id')->constrained('users');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

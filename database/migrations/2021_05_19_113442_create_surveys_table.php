@@ -18,6 +18,7 @@ class CreateSurveysTable extends Migration
             $table->string('title');
             $table->longText('description');
             $table->foreignId('user_id')->constrained('users');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
