@@ -40,4 +40,25 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+        /**
+     * Returns surveys that are associated with this user
+     * 
+     * @Return hasMany
+     * 
+     */
+    public function surveys()
+    {
+        return $this->hasMany(Survey::class);
+    }
+
+     /**
+     * Returns responses made by the user
+     * 
+     * @Return hasMany
+     * 
+     */
+    public function responses()
+    {
+        return $this->hasMany(Response::class);
+    }
 }
