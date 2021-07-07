@@ -18,9 +18,6 @@ class CreateSurveysTable extends Migration
             $table->string('title');
             $table->longText('description');
             $table->foreignId('user_id')->constrained('users');
-            $table->dateTime('start');
-            $table->dateTime('end');
-            $table->timestamp('published_at');
             $table->timestamps();
         });
     }
