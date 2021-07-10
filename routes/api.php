@@ -17,30 +17,20 @@ use App\Http\Controllers\Api\V1\SurveyController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-   
-});
-
-Route::post('login', [AuthController::class, 'signin'])->name('login');
-
-
 
 Route::middleware('auth:sanctum')
     ->namespace('Api\\V1')
-    ->group(function() {
-        Route::prefix('users')->group()
+    ->group(function () {
+
+        //Login.
+        Route::post('login', [AuthController::class, 'signin'])->name('login');
+
+        //Survey.
         Route::get('users/me/surveys', [SurveyController::class, 'index'])->name('survey.index');
         Route::get('users/me/surveys/{survey}', [SurveyController::class, 'show'])->name('survey.show');
         Route::post('users/me/surveys', [SurveyController::class, 'store'])->name('survey.store');
         Route::patch('users/me/surveys/{survey}', [SurveyController::class, 'update'])->name('survey.update');
-        Route::delete('users/me/surveys/{survey}', [SurveyController::class, 'destroy'])->name('survey.destroy');
+        Route::delete('users/me/surveys/{survey}', [SurveyController::class, 'destroy'])->name('survey.delete');
 
-        Route::post('surveys/{survey}/questions',[QuestionController::class, 'create'])->name('create.question');
-
+        Route::get('surveys/{survey}/questions', [QuestionController::class, 'show'])->name('question.create');
     });
-
-
-// Route::prefix('surveys')->group(function(){
-//     Route::apiResource('', SurveyController::class);
-// });
