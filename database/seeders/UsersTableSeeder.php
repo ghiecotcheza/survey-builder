@@ -37,7 +37,6 @@ class UsersTableSeeder extends Seeder
                 'name'      => $user['name'],
                 'password'  => '',
                 
-
             ]);
         }
     }
