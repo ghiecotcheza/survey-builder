@@ -6,8 +6,7 @@ use App\Models\Survey;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SurveyResource;
-use App\Http\Requests\CreateSurveyRequest;
-use App\Http\Requests\UpdateSurveyRequest;
+use App\Http\Requests\SurveyRequest;
 use App\Http\Resources\SingleSurveyResource;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -35,7 +34,8 @@ class SurveyController extends Controller
         return new SingleSurveyResource(
             $survey->load([
                 'questions',
-                'questions.options'
+                'questions.options',
+                'questions.type'
             ])
         );
     }
@@ -43,13 +43,13 @@ class SurveyController extends Controller
     /**
      * Create a new survey
      *
-     * @param  App\Http\Requests\CreateSurveyRequest $request
+     * @param  App\Http\Requests\SurveyRequest $request
      * 
      * @return  JsonResponse
      */
-    public function store(CreateSurveyRequest $request): JsonResponse
+    public function store(SurveyRequest $request): JsonResponse
     {
-        $survey = auth()->user()->surveys()->create($request->validated());
+        auth()->user()->surveys()->create($request->validated());
 
         return response()->json([
             'status'  => 'success',
@@ -60,12 +60,12 @@ class SurveyController extends Controller
     /**
      * Update a survey.
      *
-     * @param  UpdateSurveyRequest $request
+     * @param  SurveyRequest $request
      * @param  Survey $survey
      *
      * @return JsonResponse
      */
-    public function update(Survey $survey, UpdateSurveyRequest $request): JsonResponse
+    public function update(Survey $survey, SurveyRequest $request): JsonResponse
     {
         $survey->update($request->validated());
 
@@ -75,7 +75,8 @@ class SurveyController extends Controller
             'Survey' => new SingleSurveyResource(
                 $survey->load([
                     'questions',
-                    'questions.options'
+                    'questions.options',
+                    'questions.type'
                 ])
             )
         ]);

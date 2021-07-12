@@ -15,7 +15,7 @@ class OptionsResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'option' => $this->option,
+            'option' => $this->option
         ];
     }
 }
