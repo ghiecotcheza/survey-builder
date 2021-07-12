@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Survey;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 
@@ -21,6 +19,7 @@ class SurveyController extends Controller
     {
         $this->middleware('auth');
     }
+
     /**
      * Shows all the survey associated with the user. 
      *
@@ -28,11 +27,10 @@ class SurveyController extends Controller
      * @return  View
      */
     public function index(Survey $survey): View
-    { 
+    {
         $survey = auth()->user()->surveys()->orderBy('updated_at', 'desc')->get();
-        
-        return view('survey.show', compact('survey'));
 
+        return view('survey.show', compact('survey'));
     }
 
     /**
@@ -42,7 +40,7 @@ class SurveyController extends Controller
      */
     public function create(): View
     {
-        return view('survey.create');   
+        return view('survey.create');
     }
 
     /**
@@ -54,7 +52,7 @@ class SurveyController extends Controller
      * @return RedirectResponse
      */
     public function store(Request $request): RedirectResponse
-    { 
+    {
         $survey = request()->validate([
             'title'       => 'required',
             'description' => 'required'
@@ -64,7 +62,7 @@ class SurveyController extends Controller
 
         return redirect()->route('survey.show', $survey);
     }
-    
+
     /**
      *Shows all the survey. 
      *
@@ -73,7 +71,7 @@ class SurveyController extends Controller
      */
     public function show(Survey $survey): View
     {
-        $survey->load('questions.options'); 
+        $survey->load('questions.options');
 
         return view('question.show', compact('survey'));
     }
@@ -85,7 +83,7 @@ class SurveyController extends Controller
      * @return View
      */
     public function edit(Survey $survey): View
-    {  
+    {
         return view('survey.edit', compact('survey'));
     }
 
@@ -103,12 +101,12 @@ class SurveyController extends Controller
             'title'       => 'required',
             'description' => 'required'
         ]);
-       
+
         $survey = auth()->user()->surveys()->where('id', $survey->id)->update($surveyValidated);
 
         return redirect('survey/show')->with('status', 'Survey updated!');
-
     }
+    
     /**
      * Delete the data from the database.
      *
@@ -116,7 +114,7 @@ class SurveyController extends Controller
      * @return RedirectResponse
      */
     public function destroy(Survey $survey): RedirectResponse
-    { 
+    {
         $survey->delete();
         return redirect()->back();
     }

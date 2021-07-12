@@ -8,11 +8,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
     use SoftDeletes;
+    use HasRoles;
+    use HasApiTokens;
+   
 
     /**
      * The attributes that are mass assignable.
@@ -64,4 +69,17 @@ class User extends Authenticatable
     {
         return $this->hasMany(Response::class);
     }
+
+    /**
+     * Returns the roles of this user
+     * 
+     * @Return HasMany
+     * 
+     */
+    public function role(): HasMany
+    {
+        return $this->hasMany(Role::class);
+    }
+
+    
 }

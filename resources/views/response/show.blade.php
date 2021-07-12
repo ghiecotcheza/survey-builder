@@ -43,7 +43,6 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <input type="textarea" name="answer[{{ $key }}][answer]"
-
                                                 value="{{ old('answer.' . $key . '.answer') }}" class="form-control" id="answer"
                                                 placeholder="Write your answer here" style="height: 60px">
                                             <input type="hidden" name="answer[{{ $key }}][question_id]"
