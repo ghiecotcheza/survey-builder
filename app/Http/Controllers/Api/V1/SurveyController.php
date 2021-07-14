@@ -72,7 +72,7 @@ class SurveyController extends Controller
         return response()->json([
             'status'  => 'success',
             'message' => 'Succesfully updated survey.',
-            'Survey' => new SingleSurveyResource(
+            'survey' => new SingleSurveyResource(
                 $survey->load([
                     'questions',
                     'questions.options',
