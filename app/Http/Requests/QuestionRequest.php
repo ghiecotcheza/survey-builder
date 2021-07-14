@@ -26,7 +26,7 @@ class QuestionRequest extends FormRequest
     {
         return [
             'question' => ['required', 'min:2', 'max:255'],
-            'question_type_id' =>['required', 'exists:App\Models\QuestionType,id']
+            'question_type_id' => ['required', 'exists:App\Models\QuestionType,id']
         ];
     }
 }
