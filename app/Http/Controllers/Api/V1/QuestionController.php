@@ -30,7 +30,7 @@ class QuestionController extends Controller
         ]);
     }
 
-     /**
+    /**
      * Create a new question 
      *
      * @param  QuestionRequest $request
