@@ -20,7 +20,7 @@ class QuestionController extends Controller
      * 
      * @return  JsonResponse
      */
-    public function store(QuestionRequest $request, Survey $survey ): JsonResponse
+    public function store(QuestionRequest $request, Survey $survey): JsonResponse
     {
         $survey->questions()->create($request->validated());
         
