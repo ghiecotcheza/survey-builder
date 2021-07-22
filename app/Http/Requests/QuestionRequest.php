@@ -3,16 +3,16 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Validator;
 
-
-class CreateSurveyRequest extends FormRequest
+class QuestionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize(): bool
+    public function authorize()
     {
         return true;
     }
@@ -22,12 +22,11 @@ class CreateSurveyRequest extends FormRequest
      *
      * @return array
      */
-    public function rules(): array
-    { 
-    
+    public function rules()
+    {
         return [
-            'title'       => ['required', 'min:2', 'max:100'],
-            'description' => ['required', 'min:2', 'max:255'],
-        ]; 
+            'question' => ['required', 'min:2', 'max:255'],
+            'question_type_id' => ['required', 'exists:App\Models\QuestionType,id']
+        ];
     }
 }
