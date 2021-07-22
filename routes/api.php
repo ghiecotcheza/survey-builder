@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\AuthController;
-use App\Http\Controllers\Api\V1\QuestionController;
 use App\Http\Controllers\Api\V1\SurveyController;
+use App\Http\Controllers\Api\V1\QuestionController;
+use App\Http\Controllers\Api\V1\QuestionOptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,8 +32,15 @@ Route::middleware('auth:sanctum')
         Route::patch('users/me/surveys/{survey}', [SurveyController::class, 'update'])->name('survey.update');
         Route::delete('users/me/surveys/{survey}', [SurveyController::class, 'destroy'])->name('survey.delete');
 
+        //Question.
+        Route::get('surveys/{survey}/questions/{question}',[QuestionController::class, 'show'])->name('question.show');
         Route::post('surveys/{survey}/questions', [QuestionController::class, 'store'])->name('question.store');
         Route::patch('surveys/{survey}/questions/{question}', [QuestionController::class, 'update'])->name('question.update');
         Route::delete('surveys/{survey}/questions/{question}', [QuestionController::class, 'destroy'])->name('question.destroy');
 
+        //Question options.
+        Route::get('questions/{question}/options/{option}', [QuestionOptionController::class, 'show']);
+        Route::post('questions/{question}/options',[QuestionOptionController::class, 'store']);
+        Route::patch('questions/{question}/options/{option}', [QuestionOptionController::class, 'update']);
+        Route::delete('questions/{question}/options/{option}', [QuestionOptionController::class, 'destroy']);
     });

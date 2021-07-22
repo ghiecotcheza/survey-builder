@@ -13,7 +13,7 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 class SurveyController extends Controller
 {
     /**
-     * Get all the surveys
+     * Fetch all the surveys
      *
      * @return AnonymousResourceCollection
      */
@@ -25,11 +25,11 @@ class SurveyController extends Controller
     /**
      * Retrieve one specific survey
      *
-     * @param Survey $survey
+     * @param  Survey  $survey
      * 
-     * @return SurveyResource
+     * @return SingleSurveyResource
      */
-    public function show(Survey $survey)
+    public function show(Survey $survey): SingleSurveyResource
     {
         return new SingleSurveyResource(
             $survey->load([
@@ -43,9 +43,9 @@ class SurveyController extends Controller
     /**
      * Create a new survey
      *
-     * @param  App\Http\Requests\SurveyRequest $request
+     * @param  App\Http\Requests\SurveyRequest  $request
      * 
-     * @return  JsonResponse
+     * @return JsonResponse
      */
     public function store(SurveyRequest $request): JsonResponse
     {
@@ -60,8 +60,8 @@ class SurveyController extends Controller
     /**
      * Update a survey.
      *
-     * @param  SurveyRequest $request
-     * @param  Survey $survey
+     * @param  SurveyRequest  $request
+     * @param  Survey  $survey
      *
      * @return JsonResponse
      */
@@ -72,7 +72,7 @@ class SurveyController extends Controller
         return response()->json([
             'status'  => 'success',
             'message' => 'Succesfully updated survey.',
-            'Survey' => new SingleSurveyResource(
+            'survey' => new SingleSurveyResource(
                 $survey->load([
                     'questions',
                     'questions.options',
@@ -85,7 +85,7 @@ class SurveyController extends Controller
     /**
      * Delete a survey.
      *
-     * @param  Survey $survey
+     * @param  Survey  $survey
      *
      * @return JsonResponse
      */

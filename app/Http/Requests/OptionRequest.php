@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Validator;
 
-class QuestionRequest extends FormRequest
+class OptionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +24,7 @@ class QuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            'question'         => ['required', 'min:2', 'max:255'],
-            'question_type_id' => ['required', 'exists:App\Models\QuestionType,id']
+            'option' => ['required', 'min:1', 'max:100' ]
         ];
     }
 }

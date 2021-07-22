@@ -15,7 +15,7 @@ class QuestionTypesResource extends JsonResource
     public function toArray($request)
     {
         return [
-           'questionType' => $this->name
+           'name' => $this->name
         ];
     }
 }

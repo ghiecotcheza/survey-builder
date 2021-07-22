@@ -39,29 +39,31 @@ class TestCode extends Command
      */
     public function handle()
     { 
-      
 
-        $permissionsByRole = [
-            'user' => [
-                'create survey',
-                'edit survey',
-                'delete survey'
-            ],
+       
 
-            'guest' => [
-                'view survey',
-                'answer survey'
-            ],
-        ];
 
-        $insertPermissions = fn ($role) => collect($permissionsByRole[$role])
-            ->map(fn ($name) => Permission::insertGetId(['name' => $name, 'guard_name' => 'web']))
-            ->toArray();
+    //     $permissionsByRole = [
+    //         'user' => [
+    //             'create survey',
+    //             'edit survey',
+    //             'delete survey'
+    //         ],
 
-        $permissionIdsByRole = [
-            'user' => $insertPermissions('user'),
-            'guest' => $insertPermissions('guest')
-        ];
-        dd($permissionIdsByRole);
-    }
+    //         'guest' => [
+    //             'view survey',
+    //             'answer survey'
+    //         ],
+    //     ];
+
+    //     $insertPermissions = fn ($role) => collect($permissionsByRole[$role])
+    //         ->map(fn ($name) => Permission::insertGetId(['name' => $name, 'guard_name' => 'web']))
+    //         ->toArray();
+
+    //     $permissionIdsByRole = [
+    //         'user' => $insertPermissions('user'),
+    //         'guest' => $insertPermissions('guest')
+    //     ];
+    //     dd($permissionIdsByRole);
+     }
 }

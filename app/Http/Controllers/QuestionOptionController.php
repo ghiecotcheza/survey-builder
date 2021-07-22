@@ -71,7 +71,7 @@ class QuestionOptionController extends Controller
             $options = request()->validate([
                 'options.*.option'          => 'required'
             ]);
-
+dd($options);
             $question->options()
                 ->createMany($options['options']);
 
