@@ -47,6 +47,6 @@ Route::middleware('auth:sanctum')
         //this is gamma branch and i will merge it to master
 
         //this is the echo branch
-        
+ 
         
     });
