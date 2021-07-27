@@ -25,7 +25,7 @@ class SurveyRequest extends FormRequest
     { 
     
         return [
-            'title'       => ['required', 'min:2', 'max:100'],
+            'title'       => ['required', 'min:2', 'max:255'],
             'description' => ['required', 'min:2', 'max:255'],
         ]; 
     }
